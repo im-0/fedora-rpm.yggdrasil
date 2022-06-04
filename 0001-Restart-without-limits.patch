@@ -1,0 +1,38 @@
+From 82824f61f753705d4fe03db3858ae77feaacfcbf Mon Sep 17 00:00:00 2001
+From: Ivan Mironov <mironov.ivan@gmail.com>
+Date: Sat, 4 Jun 2022 17:45:59 +0500
+Subject: [PATCH] Restart without limits
+
+---
+ contrib/systemd/yggdrasil.service | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/contrib/systemd/yggdrasil.service b/contrib/systemd/yggdrasil.service
+index cdada6c00a09..390194b02ace 100644
+--- a/contrib/systemd/yggdrasil.service
++++ b/contrib/systemd/yggdrasil.service
+@@ -1,10 +1,11 @@
+ [Unit]
+ Description=yggdrasil
+-Wants=network-online.target
+ Wants=yggdrasil-default-config.service
+-After=network-online.target
++After=network.target
+ After=yggdrasil-default-config.service
+ 
++StartLimitIntervalSec=0
++
+ [Service]
+ Group=yggdrasil
+ ProtectHome=true
+@@ -15,6 +16,7 @@ ExecStartPre=+-/sbin/modprobe tun
+ ExecStart=/usr/bin/yggdrasil -useconffile /etc/yggdrasil.conf
+ ExecReload=/bin/kill -HUP $MAINPID
+ Restart=always
++RestartSec=10
+ TimeoutStopSec=5
+ 
+ [Install]
+-- 
+2.36.1
+
