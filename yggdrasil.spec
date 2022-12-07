@@ -1,5 +1,5 @@
 Name:           yggdrasil
-Version:        0.4.4
+Version:        0.4.7
 Release:        1.im0%{?dist}
 Summary:        End-to-end encrypted IPv6 networking
 
@@ -31,7 +31,6 @@ getent group yggdrasil >/dev/null || groupadd -r yggdrasil
 exit 0
 
 %prep
-%autosetup -p1 -b0 -n %{name}-go-%{version}
 %autosetup -p1 -b1 -n %{name}-go-%{version}
 
 %build
