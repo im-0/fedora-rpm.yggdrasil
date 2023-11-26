@@ -1,5 +1,5 @@
 Name:           yggdrasil
-Version:        0.4.7
+Version:        0.5.2
 Release:        1.im0%{?dist}
 Summary:        End-to-end encrypted IPv6 networking
 
@@ -14,7 +14,7 @@ Source1:    %{name}-go-%{version}.go-mod-vendor.tar.xz
 Patch0:     0001-Restart-without-limits.patch
 
 %{?systemd_requires}
-BuildRequires:  systemd golang >= 1.17 git
+BuildRequires:  systemd golang >= 1.20 git
 Requires(pre):  shadow-utils
 Conflicts:      yggdrasil-develop
 
@@ -36,7 +36,8 @@ exit 0
 %build
 export PKGNAME="%{name}"
 export PKGVER="%{version}"
-./build -t -p -l "-linkmode=external"
+export GOPROXY="https://proxy.golang.org,direct"
+LDFLAGS="" ./build -t -p -l "-linkmode=external"
 
 %install
 rm -rf %{buildroot}
