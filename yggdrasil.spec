@@ -1,5 +1,5 @@
 Name:           yggdrasil
-Version:        0.5.11
+Version:        0.5.12
 Release:        1.im0%{?dist}
 Summary:        End-to-end encrypted IPv6 networking
 
@@ -14,7 +14,7 @@ Source1:    %{name}-go-%{version}.go-mod-vendor.tar.xz
 Patch0:     0001-Restart-without-limits.patch
 
 %{?systemd_requires}
-BuildRequires:  systemd golang >= 1.21 git
+BuildRequires:  systemd golang >= 1.22 git
 Conflicts:      yggdrasil-develop
 
 %description
